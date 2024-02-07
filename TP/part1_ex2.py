@@ -24,7 +24,7 @@ def create_modified_signal(signal, taille_paquet, probabilite_latence, latence):
             nb += 1
             for j in range(latence):
                 signal_paquet = np.append(signal_paquet, np.nan)
-            signal_paquet = np.append(signal_paquet, signal[i-1])
+            #signal_paquet = np.append(signal_paquet, signal[i-1])
         
         signal_paquet = np.append(signal_paquet, signal[i:i+taille_paquet])
     time_quantized = np.linspace(0, 1/frequence*len(signal_paquet) /10, len(signal_paquet))
@@ -74,14 +74,14 @@ signal = quantifier(signal, bits)
 
 # Paramètres de la simulation
 taille_paquet = 2  # taille du paquet en octets
-probabilite_latence = 0.01  # probabilité que la latence se produise (1%)
+probabilite_latence = 0.1  # probabilité que la latence se produise (1%)
 latence = 1  # Limite le temps de latence à 1 paquet 
 
 # Créer le signal modifié avec latence
 signal_paquet, temps_modifies = create_modified_signal(signal, taille_paquet, probabilite_latence, latence)
 
 # Tracer le signal original et le signal modifié
-plot_signal_and_modified_signal(2, signal, np.arange(len(signal)) / frequence_echontillonage, signal_paquet, temps_modifies)
+plot_signal_and_modified_signal(10, signal, np.arange(len(signal)) / frequence_echontillonage, signal_paquet, temps_modifies)
 
 # Enregistrer le signal audio modifié
 save_modified_audio(signal_paquet, frequence_echontillonage, 'TP\signaux\latence_signal.wav')

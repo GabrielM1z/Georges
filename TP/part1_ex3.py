@@ -76,7 +76,7 @@ def plot_signal_and_modified_signal(nb_p_plot, signal, signal_perte, fs, probabi
     plt.xlim(0, nb_p_plot * periode)  # Limiter l'axe des x à 3 périodes
     plt.xlabel('Temps (s)')
     plt.ylabel('Amplitude')
-    plt.title(f'Comparaison du Signal Original et du Signal avec Perte ({probabilite_perte}%)')
+    plt.title(f'Comparaison du Signal Original et du Signal avec Perte ({probabilite_perte*100}%)')
     plt.legend()
     plt.grid(True)
     plt.show()
@@ -84,8 +84,8 @@ def plot_signal_and_modified_signal(nb_p_plot, signal, signal_perte, fs, probabi
     
 # Tester avec différentes probabilités de perte
 for probabilite_perte in [0.001, 0.01, 0.1]:
-    print(f"Test avec une probabilité de perte de {probabilite_perte} %.")
+    print(f"Test avec une probabilité de perte de {probabilite_perte*100} %.")
     nombre_paquets(signal, taille_paquet)
     signal_perte = perte_paquets(signal, taille_paquet,probabilite_perte)
-    plot_signal_and_modified_signal(4, signal, signal_perte, frequence_echontillonage, probabilite_perte)
-    save_modified_audio(signal_perte, frequence_echontillonage, f'perte_{probabilite_perte}_signal.wav')
+    plot_signal_and_modified_signal(10, signal, signal_perte, frequence_echontillonage, probabilite_perte)
+    save_modified_audio(signal_perte, frequence_echontillonage, f'TP\signaux\perte_{probabilite_perte}_signal.wav')
