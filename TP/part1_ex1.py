@@ -54,26 +54,6 @@ def quantifier(signal, bits):
     return np.round((signal - signal_min) / q) * q + signal_min
 
 
-#Nombre de bits/éch.
-bits = 8
-
-signal_quantifie_8 = quantifier(signal, bits)
-signal_quantifie_int16 = np.int16((signal_quantifie_8 + 1) * 32767 / 2)
-
-# Visualisation - Affichage limité à 3 périodes
-periode = 1 / frequence
-plt.figure()
-plt.plot(t, signal, label='Original')
-plt.plot(t, signal_quantifie_8, label=f'Quantifié à 8 bits')
-plt.xlim(0, 2 * periode)  # Limiter l'axe des x à 3 périodes
-plt.legend()
-plt.xlabel('Temps (s)')
-plt.ylabel('Amplitude')
-plt.title(f'Quantification à 8 bits')
-plt.show()
-
-# Sauvegarder le signal quantifié
-write(f'TP/signaux/signal_quantifie_8bits.wav', frequence_echontillonage, signal_quantifie_int16)
 
 """
 On peut voir avec la création de ce signal echantilloné à 8bits/ech
@@ -92,7 +72,7 @@ sinusoidal et celui ci
 
 
 # Création du signal
-for bits in [6, 4, 3, 2]:
+for bits in [8, 6, 4, 3, 2, 1]:
     signal_quantifie = quantifier(signal, bits)
     signal_quantifie_int16 = np.int16((signal_quantifie + 1) * 32767 / 2)    
     
@@ -101,7 +81,7 @@ for bits in [6, 4, 3, 2]:
     plt.figure()
     plt.plot(t, signal, label='Original')
     plt.plot(t, signal_quantifie, label=f'Quantifié à {bits} bits')
-    plt.xlim(0, 2 * periode)  # Limiter l'axe des x à 3 périodes
+    plt.xlim(0, 3 * periode)  # Limiter l'axe des x à 3 périodes
     plt.legend()
     plt.xlabel('Temps (s)')
     plt.ylabel('Amplitude')
@@ -121,33 +101,6 @@ Plus nous diminuons le nombre de bit par échantillons, moins le signal
 sera de bonne qualité et plus le bruit de quantification sera élevé.
 """
 
-
-
-############# 1/c/ Creation d'un signal quantifier à :
-#############           - 1bit/ech
-
-
-#Nombre de bits/éch.
-bits = 1
-
-signal_quantifie = quantifier(signal, bits)
-signal_quantifie_int16 = np.int16((signal_quantifie + 1) * 32767 / 2)
-
-# Visualisation - Affichage limité à 3 périodes
-periode = 1 / frequence_echontillonage
-plt.figure()
-plt.plot(t, signal, label='Original')
-plt.plot(t, signal_quantifie, label=f'Quantifié à 1 bits')
-plt.xlim(0, 2 * periode)  # Limiter l'axe des x à 3 périodes
-plt.legend()
-plt.xlabel('Temps (s)')
-plt.ylabel('Amplitude')
-plt.title(f'Quantification à 1 bits')
-plt.show()
-
-
-# Sauvegarder le signal quantifié
-write(f'TP\signaux\signal_quantifie_1bit.wav', frequence_echontillonage, signal_quantifie_int16)
 
 """
 Dans ce dernier cas la différence en deviens inratable.
