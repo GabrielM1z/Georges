@@ -88,4 +88,6 @@ for probabilite_perte in [0.001, 0.01, 0.1]:
     nombre_paquets(signal, taille_paquet)
     signal_perte = perte_paquets(signal, taille_paquet,probabilite_perte)
     plot_signal_and_modified_signal(10, signal, signal_perte, frequence_echontillonage, probabilite_perte)
-    save_modified_audio(signal_perte, frequence_echontillonage, f'TP\signaux\perte_{probabilite_perte}_signal.wav')
+    #    Convertir le signal en format audible
+    signal_int16 = np.int16((signal_perte + 1) * 32767 / 2)
+    save_modified_audio(signal_int16, frequence_echontillonage, f'TP\signaux\perte_{probabilite_perte}_signal.wav')
